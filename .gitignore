@@ -1,2 +1,1 @@
-/.env.production
-/docker-compose-prod.yaml
+/node_modules
