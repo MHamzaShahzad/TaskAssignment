@@ -1,0 +1,2 @@
+/.env.production
+/docker-compose-prod.yaml

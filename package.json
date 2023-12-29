@@ -1,0 +1,27 @@
+{
+  "name": "taskassignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:prod": "node -r dotenv/config server/serverA.js dotenv_config_path=.env",
+    "start:dev": "nodemon -r dotenv/config server/serverA.js -w server dotenv_config_path=.env",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "amqplib": "^0.10.3",
+    "axios": "^1.6.3",
+    "axis": "^1.0.0",
+    "bee-queue": "^1.7.1",
+    "bull": "^4.12.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^8.0.3",
+    "pg": "^8.11.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

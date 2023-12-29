@@ -1,0 +1,83 @@
+version: "3"
+
+services:
+  node_server_a:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: node_server_a
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "8081:8080"  # Change port for serverA.js
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - app-network
+    command: /usr/src/app/node_modules/.bin/nodemon server/serverA.js  # Run serverA.js
+
+  node_server_b:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: nodejs
+    container_name: node_server_b
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "8082:8080"  # Change port for serverB.js
+    volumes:
+      - .:/usr/src/app
+      - node_modules:/usr/src/app/node_modules
+    networks:
+      - app-network
+    command: /usr/src/app/node_modules/.bin/nodemon server/serverB.js  # Run serverB.js
+
+  mongo:
+    image: mongo
+    container_name: mongo_db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    ports:
+      - "27017:27017"
+    volumes:
+      - dbdata:/data/db
+    networks:
+      - app-network
+
+  redis:
+    image: redis
+    container_name: redis_db
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - app-network
+
+  postgres:
+    image: postgres
+    container_name: postgres_db
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+      - POSTGRES_DB=$POSTGRES_DB
+      - POSTGRES_HOST=$POSTGRES_HOST
+    ports:
+      - "5432:5432"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  node_modules:

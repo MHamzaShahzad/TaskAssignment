@@ -1,0 +1,5 @@
+node_modules
+.gitignore
+.env.production
+.env.staging
+.env.dev
