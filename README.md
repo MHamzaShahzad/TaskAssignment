@@ -32,14 +32,15 @@ Make sure you have Docker and Docker Compose installed on your machine.
 
    ```bash
    cd TaskAssignment
+   npm install
    ```
 
-3. Create a `.env` file in the project root with the following environment variables:
+3. Create or modify the `.env` file in the project root with the following environment variables:
 
    ```env
    APP_ENV=development
    NODE_ENV=development
-   PORT=8080 // Or might be any of your choice
+   PORT=8080 # Or might be any of your choice
 
    MONGO_USERNAME=
    MONGO_PASSWORD=
